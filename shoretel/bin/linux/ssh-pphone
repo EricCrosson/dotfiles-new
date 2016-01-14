@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+host=$1
+shift
+
+ssh -i $HOME/.ssh/10.17.18.34.rsa \
+    -o UserKnownHostsFile=/dev/null \
+    -o StrictHostKeyChecking=no \
+    admin@$host "$*"
+
