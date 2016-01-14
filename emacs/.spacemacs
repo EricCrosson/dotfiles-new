@@ -24,16 +24,15 @@
           git-magit-status-fullscreen t
           git-use-magit-next t)
      github
-     perforce
      diff-hl
      version-control
      markdown
      org
      shell
      ;; evil-extra-text-objects
-     ;; django
-     ;; ruby-on-rails
-     ;; emoji
+     django
+     ruby-on-rails
+     emoji
      games
      ranger
      eyebrowse
@@ -55,8 +54,8 @@
      (colors :variables
              colors-enable-nyan-cat-progress-bar ,(display-graphic-p))
      latex
-     ;; floobits
-     ;; arduino
+     floobits
+     arduino
      restclient
      syntax-checking
      xkcd
@@ -95,6 +94,8 @@
 
    ;; dotspacemacs-excluded-packages '()
    dotspacemacs-delete-orphan-packages t))
+
+;; TODO: add conf mode for screenrc files
 
 (defun dotspacemacs/init ()
   "Initialization function.
@@ -151,7 +152,6 @@ an exhaustive list of all spacemacs configuration options."
 This function is called at the very end of Spacemacs initialization after
 layers configuration."
 
-  (add-to-list 'auto-mode-alist '("\\.screenrc" . conf-mode))
   (add-to-list 'auto-mode-alist '("\\.urdf\\'" . xml-mode))
   (add-to-list 'auto-mode-alist '("\\.launch\\'" . xml-mode))
   (global-hl-line-mode nil)
@@ -398,9 +398,6 @@ using `abort-recursive-edit'."
     "bF" 'follow-delete-other-windows-and-split
 
     ;; TODO: autoload these defuns
-    "oi" 'org-clock-in
-    "oo" 'org-clock-out
-
     "ot" (defun trash-empty () (interactive) (call-process "trash-empty"))
 
     "od" (defun xset-dim ()
@@ -453,19 +450,14 @@ using `abort-recursive-edit'."
 
   (load-theme 'airline-light)
 
-  ;;; spacemacs integration with perforce
-  (setenv "P4PORT" "10.160.0.30:1667")
-  (setenv "P4USER" "ecrosson")
-  (setenv "P4CLIENT" "amenhotep")
-
-    (setq Don t    ;allows `eval-buffer' on *scratch*
-          Panic t  ;with `initial-scratch-message'
-          initial-scratch-message
-          (concat (propertize "Don't\nPanic\n"
-                              'font-lock-face '(:height 10.0 :inherit variable-pitch))
-                  "\n")) ;newline makes user-inserted text normal-sized
-    (server-start)
-    (message "All done, %s%s" (user-login-name) "."))
+  (setq Don t    ;allows `eval-buffer' on *scratch*
+        Panic t  ;with `initial-scratch-message'
+        initial-scratch-message
+        (concat (propertize "Don't\nPanic\n"
+                            'font-lock-face '(:height 10.0 :inherit variable-pitch))
+                "\n")) ;newline makes user-inserted text normal-sized
+  (server-start)
+  (message "All done, %s%s" (user-login-name) "."))
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
@@ -485,7 +477,7 @@ using `abort-recursive-edit'."
    (quote
     ("e87a2bd5abc8448f8676365692e908b709b93f2d3869c42a4371223aab7d9cf8" "356f57a98f35c8ead5a349408cab69f8d4d92baea131e9531611d0d82190fedf" "ea489f6710a3da0738e7dbdfc124df06a4e3ae82f191ce66c2af3e0a15e99b90" default)))
  '(magit-use-overlays nil)
- '(org-agenda-files (quote ("~/workspace/org/shoretel.org")))
+ '(org-agenda-files (quote ("~/workspace/classes/his320r/notes.org")))
  '(paradox-github-token t)
  '(ring-bell-function (quote ignore) t)
  '(safe-local-variable-values
