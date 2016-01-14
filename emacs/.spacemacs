@@ -30,10 +30,11 @@
      markdown
      org
      shell
-     ;; evil-extra-text-objects
+     evil-extra-text-objects
      ;; django
      ;; ruby-on-rails
-     ;; emoji
+     extra-langs
+     emoji
      games
      ranger
      eyebrowse
@@ -55,8 +56,8 @@
      (colors :variables
              colors-enable-nyan-cat-progress-bar ,(display-graphic-p))
      latex
-     ;; floobits
-     ;; arduino
+     floobits
+     arduino
      restclient
      syntax-checking
      xkcd
@@ -69,12 +70,12 @@
      highlight-stages
      focus
      misc-cmds
-     chess
+     ;; chess
      writegood-mode
      bliss
      savehist
      ;; unselectable-buffer
-     twittering
+     ;; twittering
      engine-mode
      midnight
      tea-time
@@ -101,6 +102,8 @@
 This function is called at the very startup of Spacemacs
 initialization before layers configuration. This defun contains
 an exhaustive list of all spacemacs configuration options."
+  (defun dotspacemacs/mb (arg) (* 1024 1024 arg))
+  (set 'gc-cons-threshold (dotspacemacs/mb 100))
   (setq-default
    dotspacemacs-editing-style 'vim
    ;; dotspacemacs-verbose-loading t
@@ -151,12 +154,18 @@ an exhaustive list of all spacemacs configuration options."
 This function is called at the very end of Spacemacs initialization after
 layers configuration."
 
-  (add-to-list 'auto-mode-alist '("\\.screenrc" . conf-mode))
   (add-to-list 'auto-mode-alist '("\\.urdf\\'" . xml-mode))
   (add-to-list 'auto-mode-alist '("\\.launch\\'" . xml-mode))
+  (add-to-list 'auto-mode-alist '("\\.qml\\'" . qml-mode))
+  (add-to-list 'auto-mode-alist '("\\.screenrc\\'" . conf-mode))
+  (add-to-list 'auto-mode-alist '("\\.pro\\'" . conf-mode))
+  (add-to-list 'auto-mode-alist '("\\.pri\\'" . conf-mode))
+
+  (setq projectile-enable-caching t)
+
   (global-hl-line-mode nil)
   (rainbow-mode t)
-  (nyan-mode t)
+  ;; (nyan-mode t)
   (setq evil-move-beyond-eol t)
 
   (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode)
@@ -204,6 +213,17 @@ layers configuration."
    x-select-enable-clipboard t       ;global clipboard
    doc-view-continuous t
    ff-search-directories '("." "../inc" "../src"))
+
+  ;; Increase ring sizes
+  (setq kill-ring-max 500
+        extended-command-history-max 50
+        query-replace-history-max 50
+        replace-string-history-max 50
+        file-name-history-max 50
+        replace-regex-history-max 50
+        minibuffer-history-max 1000
+        shell-command-history-max 1000
+        find-file-history-max 1000)
 
   ;; Char and font encoding
   (set-buffer-file-coding-system 'unix)
@@ -398,9 +418,6 @@ using `abort-recursive-edit'."
     "bF" 'follow-delete-other-windows-and-split
 
     ;; TODO: autoload these defuns
-    "oi" 'org-clock-in
-    "oo" 'org-clock-out
-
     "ot" (defun trash-empty () (interactive) (call-process "trash-empty"))
 
     "od" (defun xset-dim ()
@@ -453,19 +470,14 @@ using `abort-recursive-edit'."
 
   (load-theme 'airline-light)
 
-  ;;; spacemacs integration with perforce
-  (setenv "P4PORT" "10.160.0.30:1667")
-  (setenv "P4USER" "ecrosson")
-  (setenv "P4CLIENT" "amenhotep")
-
-    (setq Don t    ;allows `eval-buffer' on *scratch*
-          Panic t  ;with `initial-scratch-message'
-          initial-scratch-message
-          (concat (propertize "Don't\nPanic\n"
-                              'font-lock-face '(:height 10.0 :inherit variable-pitch))
-                  "\n")) ;newline makes user-inserted text normal-sized
-    (server-start)
-    (message "All done, %s%s" (user-login-name) "."))
+  (setq Don t    ;allows `eval-buffer' on *scratch*
+        Panic t  ;with `initial-scratch-message'
+        initial-scratch-message
+        (concat (propertize "Don't\nPanic\n"
+                            'font-lock-face '(:height 10.0 :inherit variable-pitch))
+                "\n")) ;newline makes user-inserted text normal-sized
+  (server-start)
+  (message "All done, %s%s" (user-login-name) "."))
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
@@ -485,9 +497,12 @@ using `abort-recursive-edit'."
    (quote
     ("e87a2bd5abc8448f8676365692e908b709b93f2d3869c42a4371223aab7d9cf8" "356f57a98f35c8ead5a349408cab69f8d4d92baea131e9531611d0d82190fedf" "ea489f6710a3da0738e7dbdfc124df06a4e3ae82f191ce66c2af3e0a15e99b90" default)))
  '(magit-use-overlays nil)
- '(org-agenda-files (quote ("~/workspace/org/shoretel.org")))
+ '(org-agenda-files (quote ("~/workspace/classes/his320r/notes.org")))
+ '(package-selected-packages
+   (quote
+    (vimgolf eide p4 general-close wolfram-mode stan-mode scad-mode qml-mode matlab-mode julia-mode srefactor ranger paradox pacmacs orgit magit-gitflow magit-gh-pulls helm-flx github-clone git-gutter-fringe+ git-gutter+ gist evil-magit company-quickhelp yaml-mode xkcd ws-butler window-numbering which-key weather-metno volatile-highlights vi-tilde-fringe vagrant-tramp vagrant use-package unkillable-scratch twittering-mode toc-org tea-time sublimity stickyfunc-enhance spacemacs-theme spaceline smooth-scrolling smeargle simplenote2 shell-pop rvm ruby-tools ruby-test-mode rubocop rspec-mode robe restclient restart-emacs rbenv rainbow-mode rainbow-identifiers rainbow-delimiters quelpa pyvenv python pytest pyenv-mode puppet-mode projectile-rails pretty-lambdada popwin pony-mode pip-requirements persp-mode pcre2el pandoc-mode page-break-lines ox-pandoc org-repo-todo org-present org-pomodoro org-plus-contrib org-download org-cliplink org-bullets open-junk-file olivetti offlineimap neotree multiple-cursors multi-term move-text mmm-mode misc-cmds markdown-toc macrostep lua-mode lorem-ipsum linum-relative leuven-theme info+ indent-guide ido-vertical-mode ido-hacks ibuffer-vc ibuffer-tramp hy-mode hungry-delete htmlize hl-todo highlight-stages highlight-parentheses highlight-numbers highlight-indentation help-fns+ helm-themes helm-swoop helm-pydoc helm-projectile helm-mode-manager helm-make helm-gtags helm-gitignore helm-descbinds helm-company helm-c-yasnippet helm-ag google-translate golden-ratio gnuplot github-browse-file gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe gh-md ggtags focus flycheck-pos-tip flx-ido floobits fish-mode fill-column-indicator fic-mode feature-mode fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-jumper evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-args evil-anzu eval-sexp-fu eshell-prompt-extras esh-help erc-yt erc-view-log erc-social-graph erc-image erc-hl-nicks engine-mode emoji-cheat-sheet-plus elisp-slime-nav dockerfile-mode disaster dired+ diff-hl define-word cython-mode company-statistics company-emoji company-c-headers company-auctex company-anaconda cmake-mode clean-aindent-mode clang-format chruby chess bury-successful-compilation bundler buffer-move bm bliss-theme auto-yasnippet auto-highlight-symbol auto-compile arduino-mode ansible-doc ansible airline-themes aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell 2048-game)))
  '(paradox-github-token t)
- '(ring-bell-function (quote ignore) t)
+ '(ring-bell-function (quote ignore))
  '(safe-local-variable-values
    (quote
     ((eval when
@@ -529,6 +544,5 @@ using `abort-recursive-edit'."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:foreground "#C5C8C6" :background "#191919"))))
  '(company-tooltip-common ((t (:inherit company-tooltip :weight bold :underline nil))))
  '(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :weight bold :underline nil)))))
