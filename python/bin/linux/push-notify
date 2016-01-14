@@ -94,7 +94,7 @@ def pushover_notify(credentials, title, message):
     return exit_code
 
 
-def pushover_wrap(command_shellwords, credentials, once=False):
+def pushover_wrap(command_shellwords, credentials):
     """Wrap a shell command with pushover notifications, containing
        - command to be run, and
        - exit code
@@ -103,10 +103,9 @@ def pushover_wrap(command_shellwords, credentials, once=False):
     :return: exit code of command_shellwords
 
     """
-    if not once:
-        pushover_notify(credentials,
-                        'Action invoked: %s' % os.getcwd(),
-                        ' '.join(command_shellwords))
+    pushover_notify(credentials,
+                    'Action invoked: %s' % os.getcwd(),
+                    ' '.join(command_shellwords))
 
     exit_code = call(command_shellwords)
     print('Exit code: %s' % exit_code)
@@ -122,13 +121,11 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(
         description='Wrap command, send pushover notification with exit code',
         epilog='pushover shell_command cmd_arg1 cmd_arg2\n')
-    parser.add_argument('-a', '--account', default='shoretel',
+    parser.add_argument('-a', '--account', default='ibm',
                         help='specify which pushover key to use')
-    parser.add_argument('-o', '--once', action='store_true',
-                        help='push only one message, upon task completion')
     args, unknown = parser.parse_known_args()
 
     creds = pushover_source_credentials()
 
     creds['app_token'] = creds['app_tokens'][args.account]
-    sys.exit(pushover_wrap(unknown, creds, once=args.once))
+    sys.exit(pushover_wrap(unknown, creds))
