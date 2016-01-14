@@ -14,7 +14,6 @@ backtick 6 60 60 $HOME/bin/linux/get_freeswap
 # backtick 7 600 600 $HOME/bin/linux/get_volume
 backtick 8 600 600 $HOME/bin/linux/get_disk_space
 # backtick 9 300 300 $HOME/bin/linux/get_battery
-backtick 9 300 300 $HOME/bin/linux/get_battery
 backtick 10 3600 3600 $HOME/bin/linux/get_weather
 
 hardstatus on           # status line at the bottom
