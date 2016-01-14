@@ -9,7 +9,8 @@ backtick 1 8640 8640 ruby -e "require 'date'; puts '%.4f' % ((Date.today.yday.to
 backtick 2 0 0 sh -c 'screen -ls | grep --color=no -o "$PPID[^[:space:]]*" | cut -d"." -f2'
 # backtick 3 60 60 $HOME/bin/linux/get_short_loadavg
 backtick 4 60 60 $HOME/bin/linux/get_cputemp
-backtick 5 60 60 $HOME/bin/linux/get_freemem
+backtick 5 60 60 $HOME/bin/linux/get_freemem_helper -h
+# backtick 5 0 0 $HOME/bin/linux/get_freemem
 backtick 6 60 60 $HOME/bin/linux/get_freeswap
 # backtick 7 600 600 $HOME/bin/linux/get_volume
 backtick 8 600 600 $HOME/bin/linux/get_disk_space

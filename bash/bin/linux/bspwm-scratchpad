@@ -1,0 +1,4 @@
+xdotool search --onlyvisible --classname scratchpad windowunmap \
+|| xdotool search --classname scratchpad windowmap \
+|| st -c scratchpad -g 1000x400+460 &
+

@@ -1,8 +1,23 @@
+# bspwm config
+export PANEL_FIFO=/tmp/panel-fifo
+export PATH=$PATH:$HOME/.config/bspwm/panel
+
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
 # Themes in ~/.oh-my-zsh/themes/, "random" is also understood
-ZSH_THEME="wedisagree"
+ZSH_THEME="random"
+# dstufft
+# pygmaloin
+# jaischeema.zsh-theme
+# re5et
+# half-life
+# sonicradish :: used on nebuchadnezzar
+# juanghurtado
+# norm: uses a lambda, looks better than lambda
+# idea: merge lambda with one of the above themes for a personal mix
+
+DISABLE_UPDATE_PROMPT=true
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -45,7 +60,7 @@ autoload copy-earlier-word && zle -N copy-earlier-word && bindkey '^[,' copy-ear
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git battery nyan colored-man)
+plugins=(git archlinux nyan colored-man)
 
 # User configuration
 export PATH="$HOME/bin/nix:$HOME/bin/linux:$HOME/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:$HOME/.gem/ruby/2.2.0/bin:$PATH"
@@ -97,5 +112,41 @@ alias powertop=' sudo powertop'
 
 alias pdown='shutdown -h now'
 alias sudo='sudo '
-alias l='ls -lahv '
-alias susp='sudo pm-suspend && sudo led-disable-power '
+
+### ShoreTel specific configs ####
+export P4PORT=10.160.0.30:1667     # Austin users
+export P4USER=ecrosson
+export CANDYUSER=ecrosson
+export P4CLIENT=amenhotep
+
+setopt auto_cd
+cdpath=($HOME/workspace /mnt/depot/phone/proj/main)
+
+## Pphone configs
+
+unset P_ALL P_NAMES p2s p8s p8cgs
+# Usage:
+# $1- variable name in bash
+# $2- variable value in bash
+# $3- type of phone (optional)
+function register_phone()
+{
+    export $1=$2
+    if (( -n $(echo $P_ALL| grep "$2") || -n $(echo P_NAMES|grep "$1") )); then
+        return
+    fi
+ 
+    export P_ALL="${P_ALL} $2"
+    export P_NAMES="${P_NAMES} $1"
+ 
+    case "$3" in
+        (*2)   export p2s="${p2s} $2"     ;;
+        (*8c*) export p8cgs="${p8cgs} $2" ;;
+        (*)    export p8s="${p8s} $2"     ;;
+    esac
+}
+register_phone biggie p8001049161263.shoretel.com   p8
+register_phone kelly  p8cg00104926882B.shoretel.com p8cg
+register_phone ice    p80010491611D6.shoretel.com   p8
+register_phone short  p8001049161273.shoretel.com    p8
+

@@ -52,7 +52,7 @@ declare -rl modified_xmap=res/esc-xmap-nocaps.map
 ## @ingroup XmapnocapsUsage
 modify_xmap () {
 
-    setxkbmap -option ctrl:nocaps
+    xmodmap $(dirname $(readlink -e $0))/${modified_xmap} &
 }
 
 modify_xmap
