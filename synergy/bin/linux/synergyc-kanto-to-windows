@@ -1,0 +1,1 @@
+synergyc --restart --display :0 --daemon 10.160.1.40

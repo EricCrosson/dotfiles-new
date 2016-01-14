@@ -1,24 +1,18 @@
-# bspwm config
-export PANEL_FIFO=/tmp/panel-fifo
-export PATH=$PATH:$HOME/.config/bspwm/panel
-
 # Path to your oh-my-zsh installation.
-export ZSH=$HOME/.oh-my-zsh
+export ZSH=/home/eric/.oh-my-zsh
 
-# Themes in ~/.oh-my-zsh/themes/, "random" is also understood
-ZSH_THEME="random"
-# dstufft
-# pygmaloin
-# jaischeema.zsh-theme
-# re5et
-# half-life
-# sonicradish :: used on nebuchadnezzar
-# juanghurtado
-# norm: uses a lambda, looks better than lambda
-# idea: merge lambda with one of the above themes for a personal mix
+# Set name of the theme to load.
+# Look in ~/.oh-my-zsh/themes/
+# Optionally, if you set this to "random", it'll load a random theme each
+# time that oh-my-zsh is loaded.
+ZSH_THEME="fox"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
+
+# Uncomment the following line to use hyphen-insensitive completion. Case
+# sensitive completion must be off. _ and - will be interchangeable.
+# HYPHEN_INSENSITIVE="true"
 
 # Uncomment the following line to disable bi-weekly auto-update checks.
 # DISABLE_AUTO_UPDATE="true"
@@ -46,27 +40,26 @@ ZSH_THEME="random"
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.
 # The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-HIST_STAMPS="yyyy-mm-dd"
+# HIST_STAMPS="mm/dd/yyyy"
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
-# M-, (copy-earlier-word) cycles backward through words of the command you've
-# accessed with M-. (insert-last-word)
-autoload copy-earlier-word && zle -N copy-earlier-word && bindkey '^[,' copy-earlier-word
-
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git archlinux nyan colored-man)
+plugins=(git)
 
 # User configuration
-export PATH="$HOME/bin/nix:$HOME/bin/linux:$HOME/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:$HOME/.gem/ruby/2.2.0/bin:$PATH"
+
+export PATH="/home/eric/bin/nix:/home/eric/bin/linux:/home/eric/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/eric/.gem/ruby/2.2.0/bin:/home/eric/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/home/eric/bin/nix:/home/eric/bin/kanto:/home/eric/.gem/ruby/2.0.0/bin:/home/eric/bin/linux:/home/eric/bin/p4v/bin"
+# export MANPATH="/usr/local/man:$MANPATH"
+export PATH=$PATH:$HOME/.rbenv/bin
+eval "$(rbenv init -)"
+export PATH=$PATH:/$HOME/.rbenv/plugins/ruby-build/bin
 
 source $ZSH/oh-my-zsh.sh
-[ -f /usr/bin/virtualenvwrapper.sh ] && source /usr/bin/virtualenvwrapper.sh
-[ -f /usr/bin/local/virtualenvwrapper.sh ] && source /usr/bin/local/virtualenvwrapper.sh
-unalias d
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -75,38 +68,62 @@ unalias d
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='vim'
 else
-    # fix your emacsclient
-  export EDITOR='vim'
+  # TODO: emacsclient-ize
+  export EDITOR='emacs'
 fi
+
+# Compilation flags
+# export ARCHFLAGS="-arch x86_64"
+
+# ssh
+# export SSH_KEY_PATH="~/.ssh/dsa_id"
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
-if [ -f ~/.fzf.zsh ]; then
-    source ~/.fzf.zsh
-    source ~/dotfiles/fzf/.fzfrc
-    alias f='fzf'
-fi
+#
+# Example aliases
+# alias zshconfig="mate ~/.zshrc"
+# alias ohmyzsh="mate ~/.oh-my-zsh"
+alias yaourt='pacapt '
 
-function serve {
-    port="${1:-3000}"
-    ruby -r webrick -e "s = WEBrick::HTTPServer.new(:Port => ${port}, :DocumentRoot => Dir.pwd); trap('INT') { s.shutdown }; s.start"
+### Virtualenvwrapper config
+source /usr/local/bin/virtualenvwrapper.sh
+
+### ShoreTel specific configs ####
+export P4PORT=10.160.0.30:1667     # Austin users
+export P4USER=ecrosson
+export CANDYUSER=ecrosson
+export P4CLIENT=kanto
+
+setopt auto_cd
+cdpath=($HOME/workspace /depot/phone/proj/main)
+
+## Pphone configs
+
+unset P_ALL P_NAMES p2s p8s p8cgs
+# Usage:
+# $1- variable name in bash
+# $2- variable value in bash
+# $3- type of phone (optional)
+function register_phone()
+{
+    export $1=$2
+    if (( -n $(echo $P_ALL| grep "$2") || -n $(echo P_NAMES|grep "$1") )); then
+	return
+    fi
+ 
+    export P_ALL="${P_ALL} $2"
+    export P_NAMES="${P_NAMES} $1"
+ 
+    case "$3" in
+        (*2)   export p2s="${p2s} $2"     ;;
+        (*8c*) export p8cgs="${p8cgs} $2" ;;
+        (*)    export p8s="${p8s} $2"     ;;
+    esac
 }
-
-export VERBOSE_CD=1
-# TODO: replace cd with this neophyte
-d() {
-    cd "$@" && ([[ -n $VERBOSE_CD && -n "$@" ]] && l)
-}
-
-alias gs='git status '
-alias yum='sudo yum '
-alias cpi=cherry-pick-into
-
-# avoid submitting these commands into the shell's history
-alias nautilus=' nautilus'
-alias powertop=' sudo powertop'
-
-alias pdown='shutdown -h now'
-alias sudo='sudo '
+register_phone biggie p8001049161263.shoretel.com   p8
+register_phone kelly  p8cg00104926882B.shoretel.com p8cg
+register_phone ice    p80010491611D6.shoretel.com   p8
+register_phone short  p8001049161273.shoretel.com    p8
