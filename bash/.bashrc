@@ -145,3 +145,12 @@ alias sd='cd -- '    # list directories
 
 # Lastly, load machine-specific init scripts
 loadFile ${user_init_d}/$(hostname) 2>/dev/null # don't care if dne
+
+#### ShoreTel specific configs ####
+export P4PORT=10.160.0.30:1667     # Austin users
+export P4USER=ecrosson
+export CANDYUSER=ecrosson
+export P4CLIENT=nebuchadnezzar
+export GIT_REPO=10.17.1.17
+
+export PATH=/home/eric/bin:/opt/depot_tools:${PATH}

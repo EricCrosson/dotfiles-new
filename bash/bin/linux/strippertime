@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+# TODO: document
+arm-wrs-linux-gnueabi-armv6jel-glibc_small-strip $*
+

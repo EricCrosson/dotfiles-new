@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+# TODO: document
+
+mkdir -p "$@"
+# TODO: have this interact with the current shell -- maybe this needs to be an
+# alias
+cd "$@"
