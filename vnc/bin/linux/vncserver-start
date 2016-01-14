@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# Written by Eric Crosson
+# 2016-01-06
+
+vncserver -geometry 1680x1050 -alwaysshared :1
