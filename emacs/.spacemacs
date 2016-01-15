@@ -214,6 +214,11 @@ layers configuration."
    doc-view-continuous t
    ff-search-directories '("." "../inc" "../src"))
 
+  (defun evil-scroll-current-line-to-center ()
+    "Scroll line containing point to the center of the screen."
+    (call-interactively 'evil-scroll-line-to-center))
+  (advice-add 'spacemacs/jump-in-buffer :after #'evil-scroll-current-line-to-center)
+
   ;; Increase ring sizes
   (setq kill-ring-max 500
         extended-command-history-max 50
