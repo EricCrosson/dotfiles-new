@@ -133,6 +133,6 @@ register_phone ice    p80010491611D6.shoretel.com   p8
 register_phone short  p8001049161273.shoretel.com    p8
 
 # Dbus configuration, starts emacs 10x faster
-# eval $(dbus-launch --sh-syntax)
+eval $(dbus-launch --sh-syntax)
 export DBUS_SESSION_BUS_ADDRESS
 export DBUS_SESSION_BUS_PID
