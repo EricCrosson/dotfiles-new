@@ -16,6 +16,13 @@ bspc rule -a mplayer2 floating=on
 bspc rule -a Kupfer.py focus=on
 bspc rule -a Screenkey manage=off
 bspc rule -a bspwm-scratchpad stick=on state=floating
+bspc rule -a xeyes focus=off floating=on
+bspc rule -a p2_phone_debug floating=on
+bspc rule -a p8_phone_debug floating=on
+bspc rule -a p8cg_phone_debug floating=on
+bspc rule -a p2_phone_release floating=on
+bspc rule -a p8_phone_release floating=on
+bspc rule -a p8cg_phone_release floating=on
 
 bspc config focus_follows_pointer true
 panel &
