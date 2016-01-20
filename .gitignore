@@ -22,3 +22,6 @@
 /ibm/
 */html/
 */doc/
+*.log
+*.pid
+/vnc/.vnc/passwd
