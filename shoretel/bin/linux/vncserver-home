@@ -1,0 +1,1 @@
+vnc4server -alwaysshared -httpport 5901 -geometry 1920x1080
