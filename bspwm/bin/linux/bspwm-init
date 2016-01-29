@@ -1,0 +1,4 @@
+fitscreen
+xrandr --addmode Virtual2 1680x1050
+xrandr --output Virtual2 --mode 1680x1050 --right-of Virtual1
+feh --bg-scale .config/bspwm/wallpapers/wallpaper.png
