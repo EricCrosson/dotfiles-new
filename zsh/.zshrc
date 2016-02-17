@@ -2,6 +2,10 @@
 export PANEL_FIFO=/tmp/panel-fifo
 export PATH=$PATH:$HOME/.config/bspwm/panel
 
+# Xpra settings (archaic 0.12.0, thanks ubuntu-partner for forcing me to downgrade)
+export PATH=$PATH:$HOME/bin/xpra/bin
+export PYTHONPATH=$PYTHONPATH:$HOME/bin/xpra/lib/python
+
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
@@ -30,6 +34,7 @@ DISABLE_UPDATE_PROMPT=true
 
 # Uncomment the following line to disable colors in ls.
 # DISABLE_LS_COLORS="true"
+LS_COLORS=$LS_COLORS:'di=0;95:' ; export LS_COLORS
 
 # Uncomment the following line to disable auto-setting terminal title.
 # DISABLE_AUTO_TITLE="true"
@@ -149,4 +154,4 @@ register_phone biggie p8001049161263.shoretel.com   p8
 register_phone kelly  p8cg00104926882B.shoretel.com p8cg
 register_phone ice    p80010491611D6.shoretel.com   p8
 register_phone short  p8001049161273.shoretel.com    p8
-
+register_phone marshall p80010493E8286.shoretel.com p8
