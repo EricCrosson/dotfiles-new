@@ -10,7 +10,7 @@ export PYTHONPATH=$PYTHONPATH:$HOME/bin/xpra/lib/python
 export ZSH=$HOME/.oh-my-zsh
 
 # Themes in ~/.oh-my-zsh/themes/, "random" is also understood
-ZSH_THEME="random"
+ZSH_THEME="half-life"
 # dstufft
 # pygmaloin
 # jaischeema.zsh-theme
@@ -150,8 +150,9 @@ function register_phone()
         (*)    export p8s="${p8s} $2"     ;;
     esac
 }
-register_phone biggie p8001049161263.shoretel.com   p8
-register_phone kelly  p8cg00104926882B.shoretel.com p8cg
+register_phone biggie p8cg00104926882B.shoretel.com p8cg
+register_phone kelly  p8001049161263.shoretel.com   p8
 register_phone ice    p80010491611D6.shoretel.com   p8
 register_phone short  p8001049161273.shoretel.com    p8
 register_phone marshall p80010493E8286.shoretel.com p8
+register_phone warren p20010492CFD6D.shoretel.com p2

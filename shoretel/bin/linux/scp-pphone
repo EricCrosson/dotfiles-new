@@ -6,5 +6,4 @@ dest=$1; shift
 scp -i $HOME/.ssh/10.17.18.34.rsa \
     -o UserKnownHostsFile=/dev/null \
     -o StrictHostKeyChecking=no \
-    admin@"$host" "$dest"
-
+    admin@"$host" "$dest" $@

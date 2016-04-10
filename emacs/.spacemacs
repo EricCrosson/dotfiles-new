@@ -26,6 +26,7 @@
      github
      perforce
      diff-hl
+     haskell
      version-control
      markdown
      org
@@ -35,6 +36,9 @@
      ;; ruby-on-rails
      ;; emoji
      games
+     (wakatime :variables
+               wakatime-api-key "1406aaae-0eb7-4f71-b351-575b046b7c4f"
+               wakatime-cli-path "/usr/bin/wakatime")
      ranger
      eyebrowse
      pcre2el
@@ -416,6 +420,7 @@ using `abort-recursive-edit'."
            (interactive)
            (insert (format-time-string "%A %B %e, %Y")))
 
+    "hf" 'nil
     "hff" 'find-function
     "hfv" 'find-variable
     "hfk" 'find-function-on-key
@@ -458,14 +463,14 @@ using `abort-recursive-edit'."
   (setenv "P4USER" "ecrosson")
   (setenv "P4CLIENT" "amenhotep")
 
-    (setq Don t    ;allows `eval-buffer' on *scratch*
-          Panic t  ;with `initial-scratch-message'
-          initial-scratch-message
-          (concat (propertize "Don't\nPanic\n"
-                              'font-lock-face '(:height 10.0 :inherit variable-pitch))
-                  "\n")) ;newline makes user-inserted text normal-sized
-    (server-start)
-    (message "All done, %s%s" (user-login-name) "."))
+  (setq Don t    ;allows `eval-buffer' on *scratch*
+        Panic t  ;with `initial-scratch-message'
+        initial-scratch-message
+        (concat (propertize "Don't\nPanic\n"
+                            'font-lock-face '(:height 10.0 :inherit variable-pitch))
+                "\n")) ;newline makes user-inserted text normal-sized
+  (server-start)
+  (message "All done, %s%s" (user-login-name) "."))
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
