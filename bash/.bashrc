@@ -154,3 +154,5 @@ export P4CLIENT=nebuchadnezzar
 export GIT_REPO=10.17.1.17
 
 export PATH=/home/eric/bin:/opt/depot_tools:${PATH}
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash

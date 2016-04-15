@@ -56,6 +56,7 @@ DISABLE_UPDATE_PROMPT=true
 plugins=(git)
 
 # User configuration
+export GEM_HOME=$HOME/.gems
 
 export PATH="/home/eric/bin/nix:/home/eric/bin/linux:/home/eric/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/eric/.gem/ruby/2.2.0/bin:/home/eric/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/home/eric/bin/nix:/home/eric/bin/kanto:/home/eric/.gem/ruby/2.0.0/bin:/home/eric/bin/linux:/home/eric/bin/p4v/bin"
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -90,7 +91,7 @@ fi
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias yaourt='pacapt '
+alias yaourt='sudo pacapt '
 
 ### Virtualenvwrapper config
 source /usr/local/bin/virtualenvwrapper.sh
@@ -136,3 +137,6 @@ register_phone short  p8001049161273.shoretel.com    p8
 eval $(dbus-launch --sh-syntax)
 export DBUS_SESSION_BUS_ADDRESS
 export DBUS_SESSION_BUS_PID
+alias s='screen '
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
