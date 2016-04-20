@@ -150,9 +150,10 @@ function register_phone()
         (*)    export p8s="${p8s} $2"     ;;
     esac
 }
-register_phone biggie p8cg00104926882B.shoretel.com p8cg
-register_phone kelly  p8001049161263.shoretel.com   p8
-register_phone ice    p80010491611D6.shoretel.com   p8
-register_phone short  p8001049161273.shoretel.com    p8
-register_phone marshall p80010493E8286.shoretel.com p8
-register_phone warren p20010492CFD6D.shoretel.com p2
+register_phone babylon         p8cg00104926882B.shoretel.com p8cg
+register_phone giza            p80010491611D6.shoretel.com   p8
+register_phone rhodes          p80010493E8286.shoretel.com   p8
+register_phone alexandria      p8001049161273.shoretel.com   p8
+register_phone artemis         p8cg001049435C79.shoretel.com   p8
+register_phone halicarnassus   p20010492CFD6D.shoretel.com   p2
+# register_phone kelly  p8001049161263.shoretel.com   p8
