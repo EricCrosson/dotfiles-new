@@ -1,0 +1,13 @@
+[Unit]
+Description=Load VMware shared folders
+ConditionPathExists=.host:/
+ConditionVirtualization=vmware
+
+[Mount]
+What=.host:/
+Where=/vmshare/
+Type=vmhgfs
+Options=defaults,noatime
+
+[Install]
+WantedBy=multi-user.target

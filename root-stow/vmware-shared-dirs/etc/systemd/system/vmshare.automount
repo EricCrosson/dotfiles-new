@@ -1,0 +1,10 @@
+[Unit]
+Description=Load VMware shared folders
+ConditionPathExists=.host:/
+ConditionVirtualization=vmware
+
+[Automount]
+Where=/vmshare/
+
+[Install]
+WantedBy=multi-user.target
