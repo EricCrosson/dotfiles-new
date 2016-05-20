@@ -118,6 +118,8 @@ alias powertop=' sudo powertop'
 alias pdown='shutdown -h now'
 alias sudo='sudo '
 
+alias mkvirtualenv='pip install --upgrade pip; mkvirtualenv '
+
 ### ShoreTel specific configs ####
 export P4PORT=10.160.0.30:1667     # Austin users
 export P4USER=ecrosson
