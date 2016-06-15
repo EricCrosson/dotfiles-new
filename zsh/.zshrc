@@ -159,3 +159,5 @@ register_phone alexandria      p8001049161273.shoretel.com   p8
 register_phone artemis         p8cg001049435C79.shoretel.com   p8
 register_phone halicarnassus   p20010492CFD6D.shoretel.com   p2
 # register_phone kelly  p8001049161263.shoretel.com   p8
+
+export SECRET_CONFLUENCE_USERNAME="ecrosson"
